@@ -1,0 +1,91 @@
+<nav class="navbar navbar-default navbar-expand-lg navbar-dark bg-primary fixed-top ">
+  <div class="container">
+    <a class="navbar-brand" [routerLink]="['/']">Bruce's App</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor01">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" [routerLink]="['/dashboard']">Dashboard <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" [routerLink]="['/edit']">Profile <span class="sr-only">(current)</span></a>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0" (submit) = "logout()">
+        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Log out</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+<div>
+  <div class="container pad">
+    <div class="card text-white1 bg-info1 mb-3" style="max-width: 20rem;position: fixed;">
+      <div class="card-header1">{{target_user.first_name}} {{target_user.last_name}}</div>
+      <div class="card-body">
+        <p class="card-text"><strong>Register at</strong>: {{target_user.createdAt | date:'longDate'}}</p>
+        <p class="card-text"><strong>Email</strong>: {{target_user.email}}</p>
+        <p class="card-text"><strong>Description</strong>: {{target_user.description}}</p>
+      </div>
+    </div>
+    
+    
+    <div class="messagearea">
+      <form (submit) = "create_message()" class="messageform">
+        <div class="form-group">
+          <h3>Leave a message for <span style="color: blue;">{{target_user.first_name}}</span> </h3>
+          <input type="text" name="mes" [(ngModel)] = "message.content" required #mess = "ngModel" class="form-control1">  
+          <button class="btn btn-warning btnright" >Post</button>
+        </div>
+      </form>
+
+      <div class="card2 text-white1 mb-3" style="max-width: 45rem;" *ngFor = "let m of target_user._receive_messages">
+        <div class="card-header2">
+          <strong>{{m._poster.first_name}} {{m._poster.last_name}}</strong>'s message<span class="right">{{m.createdAt | date: 'medium'}}</span>
+
+          <div class="card-body2">
+            <p class="card-text" style="display: inline-block;">{{m.content}}</p><span class="btnright2"><button *ngIf = "m._poster._id == current_user._id" class="btn btn-info btn-sm" (click) = "delete_message(m._id)">Delete this message</button></span>
+          </div>
+        </div>
+        <div class="comment">
+          <div class="card3 border-info mb-3" style="max-width: 37rem;" *ngFor = "let c of m._comments">
+            <div class="card-header3">{{c._poster.first_name}} {{c._poster.last_name}}'s comment<span class="right">{{c.createdAt | date: 'medium'}}</span></div>
+            <div class="card-body3 text-primary">
+              <p class="card-text">{{c.content}}<span class="btnright2"><button *ngIf = "c._poster._id == current_user._id" class="btn btn-info btn-sm" (click) = "delete_comment(c._id)">Delete this comment</button></span></p>
+            </div>
+          </div>
+        </div>
+        <div class="commentform">
+          <form (submit) = "create_comment(m._id)">
+            <div class="form-group">
+              <h6>Write a comment</h6>
+              <input type="text" class="form-control2" name="comment" [(ngModel)] = "comment.content" required #comm = "ngModel" >
+              <button class="btn btn-info btn-sm btnright">Comment</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

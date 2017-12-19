@@ -1,0 +1,133 @@
+<div class="back">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+    <div class="container">
+      <a class="navbar-brand" [routerLink]="['/']" style="color: white;">Bruce's App</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" [routerLink]="['/dashboard']">Dashboard <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" [routerLink]="['/edit']">Profile <span class="sr-only">(current)</span></a>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0" (submit) = "logout()">
+          <button class="btn btn-secondary my-2 my-sm-0" type="submit">Log out</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+  <!-- edit information -->
+  <div class="container">
+    <div class="bigdiv">
+      <div class="col-lg-5 subformdiv">
+        <h3>Edit information</h3>
+        <form (submit) = "update()">
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="text" name= "email" class="editcontrol" [(ngModel)] = "updateinfo.email" required email #update_email = "ngModel" placeholder = {{user.email}} >
+          </div>
+          <p *ngIf="error_message.email != ''">
+            {{error_message.email}}
+          </p>
+          <div *ngIf="update_email.invalid && (update_email.dirty || update_email.touched)">
+            <p *ngIf="update_email.errors.required">
+              Email is required.
+            </p>
+            <p *ngIf="update_email.errors.email">
+              Invalid Email.
+            </p>
+          </div>
+
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" name= "first_name" class="editcontrol" [(ngModel)] = "updateinfo.first_name" required #update_firstname = "ngModel" placeholder="{{user.first_name}}" >
+          </div>
+          <div *ngIf="update_firstname.invalid && (update_firstname.dirty || update_firstname.touched)">
+            <p *ngIf="update_firstname.errors.required">
+              First Name is required.
+            </p>
+          </div>
+
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" name= "last_name" class="editcontrol" [(ngModel)] = "updateinfo.last_name" required #update_lastname = "ngModel" placeholder="{{user.last_name}}" >
+          </div>
+          <div *ngIf="update_lastname.invalid && (update_lastname.dirty || update_lastname.touched)">
+            <p *ngIf="update_lastname.errors.required">
+              Last Name is required.
+            </p>
+          </div>
+          <hr>
+          <button class="btn btn-primary">Update Information</button>
+        </form>
+      </div>
+
+      <!-- change password -->
+      <div class="col-lg-5 subformdiv">
+        <h3>Edit password</h3>
+        <form (submit) = "updatepassword()">
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" name="password" class="editcontrol" [(ngModel)] = "password_update" required #password = "ngModel">
+          </div>
+          <div *ngIf="password.invalid && (password.dirty || password.touched)">
+            <p *ngIf="password.errors.required">
+              Password is required.
+            </p>
+          </div>
+
+          <div class="form-group">
+            <label>Password confirmation</label>
+            <input type="password" name="passwordcon" class="editcontrol" [(ngModel)] = "passwordcon" required pattern="{{password_update}}" #password_con = "ngModel">
+          </div>
+          <div *ngIf="password_con.invalid && (password_con.dirty || password_con.touched)">
+            <p *ngIf="password_con.errors.required">
+              Password confirmation is required.
+            </p>
+            <p *ngIf="password_con.errors.pattern">
+              Password confirmation is not mattch your password.
+            </p>
+          </div>
+          <hr>
+          <button class="btn btn-primary">Update Password</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- edit description -->
+    <form class="des_form" (submit) = "add_description()">
+      <h3>Edit Description</h3>
+      <input type="text" name="des" class="form-control" [(ngModel)] = "description" required #des = "ngModel">
+      <div *ngIf="des.invalid && (des.dirty || des.touched)">
+        <p *ngIf="des.errors.required">
+          Description is required.
+        </p>
+      </div>
+      <hr>
+      <button class="btn btn-primary">Save Description</button>
+    </form>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

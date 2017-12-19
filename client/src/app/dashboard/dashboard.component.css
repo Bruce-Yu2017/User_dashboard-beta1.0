@@ -1,0 +1,26 @@
+.back {
+  background-image: url("/./../assets/img/dashboard.jpeg");
+  background-position: center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 1000px;
+  opacity: 0.9;
+  background-attachment:fixed;
+  
+}
+
+.tabletop {
+  display: inline-block;
+  margin-top: 100px;
+
+}
+
+#addnew {
+  float: right;
+}
+
+.namelink {
+  color: #eafe05;
+}

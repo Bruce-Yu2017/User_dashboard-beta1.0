@@ -1,0 +1,16 @@
+.back {
+  background-image: url("/./../assets/img/addnew.jpeg");
+  background-position: center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 1000px;
+  opacity: 0.9;
+}
+
+.tabletop {
+  display: inline-block;
+  margin-top: 100px;
+
+}

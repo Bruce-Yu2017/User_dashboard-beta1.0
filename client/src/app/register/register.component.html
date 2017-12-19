@@ -1,0 +1,98 @@
+<div class="back">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+      <a class="navbar-brand" [routerLink]="['/']" id="header">Bruce's App</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+
+          </li>
+        </ul>
+        <a [routerLink]="['/signin']"><button class="btn btn-secondary my-2 my-sm-0" type="submit">Sign in</button></a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <form class="top" (submit) = (register()) >
+      <fieldset>
+        <legend>Register</legend>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Email address:</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" [(ngModel)] = "user_reg.email" required email #reg_email = "ngModel" name="email">
+        </div>
+
+        <div *ngIf="reg_email.invalid && (reg_email.dirty || reg_email.touched)">
+          <div class="alert alert-dismissible alert-danger" role="alert" *ngIf="reg_email.errors.required">
+            Email is required.
+          </div>
+          <div class="alert alert-dismissible alert-danger" role="alert" *ngIf="reg_email.errors.email">
+            Please input an valid email.
+          </div>
+        </div>
+
+        <!-- first name -->
+        <div class="form-group">
+          <label for="exampleInputEmail1">First Name:</label>
+          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter first name" name="firstname" [(ngModel)] = "user_reg.first_name" #reg_firstname = "ngModel" required >
+        </div>
+        <div *ngIf="reg_firstname.invalid && (reg_firstname.dirty || reg_firstname.touched)">
+          <div class="alert alert-dismissible alert-danger" role="alert" *ngIf="reg_firstname.errors.required">
+            First name is required.
+          </div>
+        </div>
+        
+        <!-- last name -->
+        <div class="form-group">
+          <label for="exampleInputEmail1">Last Name: </label>
+          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter last name" name="lastname" [(ngModel)] = "user_reg.last_name" #reg_lastname = "ngModel" required>
+        </div>
+        <div *ngIf="reg_lastname.invalid && (reg_lastname.dirty || reg_lastname.touched)">
+          <div class="alert alert-dismissible alert-danger" role="alert" *ngIf="reg_lastname.errors.required">
+            Last name is required.
+          </div>
+        </div>
+        
+        <!-- password -->
+        <div class="form-group">
+          <label for="exampleInputEmail1">Password</label>
+          <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter password" name="password" [(ngModel)] = "user_reg.password" #reg_password = "ngModel" required minlength="4" >
+        </div>
+        <div *ngIf="reg_password.invalid && (reg_password.dirty || reg_password.touched)">
+          <div class="alert alert-dismissible alert-danger" role="alert" *ngIf="reg_password.errors.required">
+            Password is required.
+          </div>
+          <div class="alert alert-dismissible alert-danger" role="alert" *ngIf="reg_password.errors.minlength">
+            Password need at least four characters.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="exampleInputEmail1">Password Confirmation</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Confirm your password" name="passwordconfirm" [(ngModel)] = "password_confirm.con" #reg_confirm = "ngModel" pattern="{{user_reg.password}}">
+        </div>
+        <div *ngIf="reg_confirm.invalid && (reg_confirm.dirty || reg_confirm.touched)">
+          <div class="alert alert-dismissible alert-danger" role="alert" *ngIf="reg_confirm.errors.pattern">
+            Not mattch the password.
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Register</button>
+        <div class="alert alert-dismissible alert-danger" role="alert" *ngIf="error_message.email != ''">
+          {{error_message.email}}
+        </div>
+      </fieldset>
+    </form>
+    <a [routerLink]="['/signin']" id="atag">Already have an account? Login.</a>
+  </div>
+</div>
+
+
+
+
+
+
+

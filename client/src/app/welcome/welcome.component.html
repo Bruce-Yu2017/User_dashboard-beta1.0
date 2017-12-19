@@ -1,0 +1,74 @@
+
+<!-- #############navbar################ -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container">
+    <a class="navbar-brand" [routerLink]="['/']">Bruce's App</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor01">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" [routerLink]="['/dashboard']">Home <span class="sr-only">(current)</span></a>
+        </li>
+      </ul>
+      <!-- <form class="form-inline my-2 my-lg-0"> -->
+        <a [routerLink]="['signin']"><button class="btn btn-secondary my-2 my-sm-0" type="submit">Sign In</button></a>
+        <!--   </form> -->
+      </div>
+    </div>
+  </nav>
+
+  <!-- ##########jumbotron################ -->
+  <div class="container">
+    <div class="jumbotron">
+      <h1 class="display-3">Welcome to the Bruce's User Dashboard!</h1>
+      <p class="lead">This User Dashboard app is built by MEAN stack which inclue MongoDB, Express, Angular, and Node.js. And also with the libraries include jQuery and Bootstrap.</p>
+      <hr class="my-4">
+      <p class="lead">
+        <a class="btn btn-primary btn-lg" [routerLink]="['signin']" role="button">Let's Start!</a>
+      </p>
+    </div>
+
+    <!-- ###########card################### -->
+
+    <div class="card text-white bg-info mb-3 bottomcard">
+      <div class="card-header">Manage User</div>
+      <div class="card-body">
+        <p class="card-text">Using this app, you can add, remove, and edit users from the dashboard.</p>
+      </div>
+    </div>
+
+    <div class="card text-white bg-info mb-3 bottomcard">
+      <div class="card-header">Leave Message</div>
+      <div class="card-body">
+        <p class="card-text">Users will be able to leave a message to another user using this app.</p>
+      </div>
+    </div>
+
+    <div class="card text-white bg-info mb-3 bottomcard">
+      <div class="card-header">Edit user info</div>
+      <div class="card-body">
+        <p class="card-text">Admins will be able to edit another user's information.</p>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,61 @@
+.back {
+  background-image: url("/./../assets/img/editother.jpeg");
+  background-position: center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 1000px;
+  opacity: 0.9;
+  overflow: auto;
+
+}
+.top {
+  margin-top: 284px;
+}
+
+.inlineshow {
+  display: inline-block;
+  /*width: 500px;*/
+}
+.editcontrol {
+  display: inline-block;
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: #7b8a8b;
+  background-color: #fff;
+  background-image: none;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  -webkit-transition: border-color ease-in-out 0.15s, -webkit-box-shadow ease-in-out 0.15s;
+  transition: border-color ease-in-out 0.15s, -webkit-box-shadow ease-in-out 0.15s;
+  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s, -webkit-box-shadow ease-in-out 0.15s;
+}
+
+.bigdiv {
+  margin-left: 100px; 
+  margin-top: 100px;
+}
+
+.subformdiv {
+  display: inline-block;
+  /*border: 1px solid black;*/
+}
+.des_form {
+  margin-left: 110px;
+  margin-top: 20px;
+}
+
+p {
+  color: red;
+}
+
+
+
+
+
+

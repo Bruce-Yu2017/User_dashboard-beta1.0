@@ -1,0 +1,24 @@
+#header {
+  color: white;
+}
+
+.top {
+  margin-top: 30px;
+}
+
+#atag {
+  color: blue;
+  margin-top: 20px;
+  display: block;
+}
+
+.back {
+  background-image: url("/./../assets/img/register.jpeg");
+  background-position: center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 750px;
+  opacity: 0.9;
+}

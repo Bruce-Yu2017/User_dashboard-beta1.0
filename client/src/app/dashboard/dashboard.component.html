@@ -1,0 +1,70 @@
+<nav class="navbar navbar-default navbar-expand-lg navbar-dark bg-primary fixed-top">
+  <div class="container">
+    <a class="navbar-brand" [routerLink]="['/']">Bruce's App</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor01">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" [routerLink]="['/dashboard']">Dashboard <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" [routerLink]="['/edit']">Profile <span class="sr-only">(current)</span></a>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0" (submit) = "logout()">
+        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Log out</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+<div class="back">
+  <div class="container">
+
+    <div *ngIf = "current_user.user_level == '9'">
+      <h2 class="tabletop">Manage User</h2>
+      <a [routerLink]="['/addnew']"><button id="addnew" class="tabletop btn btn-secondary">Add new</button></a>
+    </div>
+
+    <h2 *ngIf = "current_user.user_level == '0'" class="tabletop">All users</h2>
+
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Create_at</th>
+          <th scope="col">User Level</th>
+          <th scope="col" *ngIf = "current_user.user_level == '9'">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="table-success" *ngFor = "let a of allusers">
+          <th scope="row"><a [routerLink]="['/message', a._id]" class="namelink">{{a.first_name}} {{a.last_name}}</a></th>
+          <td>{{a.email}}</td>
+          <td>{{a.createdAt | date:'longDate'}}</td>
+          <td *ngIf = "a.user_level == 9">Admin</td>
+          <td *ngIf = "a.user_level == 0">Normal</td>
+          <td *ngIf = "current_user.user_level == '9'">
+            <a [routerLink]="['/edit_other', a._id]"><button *ngIf = "a.user_level != '9'" class="btn btn-info">Edit</button></a> 
+            <button *ngIf = "a.user_level != '9'" class="btn btn-danger" (click) =(delete_user(a._id))>Delete</button> </td>
+
+          </tr>
+        </tbody>
+      </table> 
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
