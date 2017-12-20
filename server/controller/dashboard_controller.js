@@ -3,7 +3,7 @@ var path = require("path");
 var User = mongoose.model("User");
 var Message = mongoose.model("Message");
 var Comment = mongoose.model("Comment");
-
+var bcrypt = require('bcrypt');
 
 module.exports = {
   register: function(req, res) {
@@ -13,14 +13,27 @@ module.exports = {
       }
       else {
         if(users.length == 0) {
-          var admin = new User(req.body);
-          admin.user_level = 9;
-          admin.save(function(err) {
+          bcrypt.hash(req.body.password, 10, function(err, hash) {
             if(err) {
-              console.log("from controller register save admin: ", err);
+              console.log("err from register hash: ", err);
             }
             else {
-              res.json({success: "success", user: admin});
+              console.log("register success hash: ", hash);
+              var admin = new User({
+                email: req.body.email,
+                first_name: req.body.first_name,
+                last_name: req.body.last_name,
+                password: hash
+              });
+              admin.user_level = 9;
+              admin.save(function(err) {
+                if(err) {
+                  console.log("from register controller: save normal user error");
+                }
+                else {
+                  res.json({success: "success", user: admin});
+                }
+              })
             }
           })
         }
@@ -31,14 +44,27 @@ module.exports = {
             }
             else {
               if(user == null) {
-                var user = new User(req.body);
-                user.user_level = 0;
-                user.save(function(err) {
+                bcrypt.hash(req.body.password, 10, function(err, hash) {
                   if(err) {
-                    console.log("from register controller: save normal user error");
+                    console.log("err from register hash: ", err);
                   }
                   else {
-                    res.json({success: "success", user: user});
+                    console.log("register success hash: ", hash);
+                    var user = new User({
+                      email: req.body.email,
+                      first_name: req.body.first_name,
+                      last_name: req.body.last_name,
+                      password: hash
+                    });
+                    user.user_level = 0;
+                    user.save(function(err) {
+                      if(err) {
+                        console.log("from register controller: save normal user error");
+                      }
+                      else {
+                        res.json({success: "success", user: user});
+                      }
+                    })
                   }
                 })
               }
@@ -62,12 +88,16 @@ module.exports = {
           res.json({error: "email invalid"})
         }
         else {
-          if(user.password == req.body.password) {
-            res.json(user)
-          }
-          else {
-            res.json({error: "password is not correct"})
-          }
+          var hash = user.password;
+          bcrypt.compare(req.body.password, hash, function(err, password) {
+            console.log("from login bcrypt: ", password);
+            if(password == true) {
+              res.json(user)
+            }
+            else {
+              res.json({error: "password is not correct"})
+            }
+          })
         }
       }
     })
@@ -130,13 +160,20 @@ module.exports = {
         console.log("from controller updatepassword: ", err);
       }
       else {
-        user.password = req.body.password;
-        user.save(function(err) {
+        bcrypt.hash(req.body.password, 10, function(err, hash) {
           if(err) {
-            console.log("from controller updatepassword after save: ", err);
+            console.log("update password err: ", err);
           }
           else {
-            res.json(user);
+            user.password = hash;
+            user.save(function(err) {
+              if(err) {
+                console.log("from controller updatepassword after save: ", err);
+              }
+              else {
+                res.json(user);
+              }
+            })
           }
         })
       }
@@ -193,7 +230,7 @@ module.exports = {
           }
           User.populate(user2, option2, function(err, user3) {
             // console.log("user3", user3._receive_messages[0]._comments[0]);
-            console.log("this,", user3._receive_messages[0]._comments[0]);
+            // console.log("this,", user3._receive_messages[0]._comments[0]);
             res.json(user3);
           })
         })

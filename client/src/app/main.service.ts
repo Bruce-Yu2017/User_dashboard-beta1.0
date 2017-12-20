@@ -11,6 +11,7 @@ export class MainService {
   }
 
   login(userdata, callback) {
+    console.log(userdata );
     this._http.post("/login", userdata).subscribe(
       (res) => {
         callback(res.json());

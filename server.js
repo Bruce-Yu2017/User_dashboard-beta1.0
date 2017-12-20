@@ -1,6 +1,13 @@
 var express = require('express');
-var bcrypt=require("bcrypt-as-promised");
+// var bcrypt=require("bcrypt-as-promised");
 var bodyParser = require('body-parser');
+
+//bcrypt here
+var bcrypt = require('bcrypt');
+const saltRounds = 10;
+const myPlaintextPassword = 's0/\/\P4$$w0rD';
+const someOtherPlaintextPassword = 'not_bacon';
+//
 
 var path = require('path')
 
